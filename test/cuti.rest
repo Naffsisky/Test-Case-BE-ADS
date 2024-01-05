@@ -1,0 +1,16 @@
+@base_url = http://localhost:3000
+
+### Get all cuti
+GET {{base_url}}/api/cutis
+Content-Type: application/json
+
+### Create cuti
+POST {{base_url}}/api/cuti
+Content-Type: application/json
+
+{
+    "nomorInduk": "IP06006",
+    "tanggalCuti": "19-08-2020",
+    "lamaCuti": 1,
+    "keterangan": "Nenek Sakit"
+}

@@ -1,0 +1,44 @@
+@base_url = http://localhost:3000
+
+### Get all employee
+GET {{base_url}}/api/employees
+Content-Type: application/json
+
+### Get all employee sortBy tanggal lahir
+GET {{base_url}}/api/employees?sortBy=tanggalLahir
+Content-Type: application/json
+
+### Get all employee sortBy nama
+GET {{base_url}}/api/employees?sortBy=nama
+Content-Type: application/json
+
+### Get employee by nomorInduk
+GET {{base_url}}/api/employee/IP06001
+Content-Type: application/json
+
+### Create employee
+POST {{base_url}}/api/employee
+Content-Type: application/json
+
+{
+    "nomorInduk": "IP06013",
+    "nama": "Raisa",
+    "alamat": "Jln Kelapa Sawit, Jakarta Selatan",
+    "tanggalLahir": "17-12-19902",
+    "tanggalBergabung": "16-08-2008"
+}
+
+### Update employee
+PUT {{base_url}}/api/employee/IP06012
+Content-Type: application/json
+
+{
+    "nama": "Aku",
+    "alamat": "Jln A Yani Raya 15 No 14, Malang",
+    "tanggalLahir": "09-08-1973",
+    "tanggalBergabung": "07-08-2024"
+}
+
+### Delete employee 
+DELETE {{base_url}}/api/employee/15
+Content-Type: application/json
