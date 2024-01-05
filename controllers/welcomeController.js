@@ -15,8 +15,8 @@ exports.welcome = (req, res) => {
             "Get All Cuti": "/api/cutis",
             "Get Cuti By ID": "/api/cuti/:nomorInduk",
             "Get Cuti Sort By Tanggal Cuti": "/api/cutis?sortBy=tanggalCuti",
-            "Create Cuti": "/api/cuti",
-            "Update Cuti": "/api/cuti/:nomorInduk",
+            "Create Cuti": "/api/cuti/:nomorInduk",
+            "Update Cuti": "/api/cuti/:id",
             "Delete Cuti": "/api/cuti/:id",
         }
     });

@@ -13,11 +13,14 @@ module.exports = (app) => {
     router.get("/employee/:nomorInduk", employeeController.getEmployeeById);
     router.post("/employee", employeeController.createEmployee);
     router.put("/employee/:nomorInduk", employeeController.updateEmployee);
-    router.delete("/employee/:id", employeeController.deleteEmployee);
+    router.delete("/employee/:nomorInduk", employeeController.deleteEmployee);
 
     // Cuti Controller
     router.get("/cutis", cutiController.getAllCutis);
-    router.post("/cuti", cutiController.createCuti);
+    router.get("/cuti/:id", cutiController.getCutiById);
+    router.post("/cuti/:nomorInduk", cutiController.createCuti);
+    router.put("/cuti/:id", cutiController.updateCuti);
+    router.delete("/cuti/:id", cutiController.deleteCuti);
 
     app.use("/api/", router);
 }

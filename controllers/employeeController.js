@@ -30,16 +30,6 @@ const createEmployee = async (req, res) => {
       });
     }
 
-    const expectedFormat = ["nomorInduk", "nama", "alamat", "tanggalLahir", "tanggalBergabung"];
-    const inputFormat = Object.keys(req.body);
-
-    if (!inputFormat.every((key) => expectedFormat.includes(key))) {
-      return res.status(400).json({
-        status: 400,
-        message: "Invalid input format",
-      });
-    }
-
     // Merubah format tanggal
     const convertedTanggalLahir = moment(tanggalLahir, "DD-MM-YYYY").format("YYYY-MM-DD");
     const convertedTanggalBergabung = moment(tanggalBergabung, "DD-MM-YYYY").format("YYYY-MM-DD");
@@ -103,17 +93,7 @@ const updateEmployee = async (req, res) => {
     if (req.body.nomorInduk && req.body.nomorInduk !== nomorInduk) {
       return res.status(400).json({
         status: 400,
-        message: "Cannot change employee's nomorInduk",
-      });
-    }
-
-    const expectedFormat = ["nama", "alamat", "tanggalLahir", "tanggalBergabung"];
-    const inputFormat = Object.keys(req.body);
-
-    if (!inputFormat.every((key) => expectedFormat.includes(key))) {
-      return res.status(400).json({
-        status: 400,
-        message: "Invalid input format",
+        message: "nomorInduk cannot be updated",
       });
     }
 
@@ -148,12 +128,12 @@ const deleteEmployee = async (req, res) => {
   try {
     console.info(req.method, req.url);
 
-    const { id } = req.params;
+    const { nomorInduk } = req.params;
 
-    // Mengecek apakah karyawan dengan id tersebut ada
+    // Mengecek apakah karyawan dengan nomor induk tersebut ada
     const existingEmployee = await Employee.findOne({
       where: {
-        id: id,
+        nomorInduk: nomorInduk,
       },
     });
 
@@ -163,6 +143,13 @@ const deleteEmployee = async (req, res) => {
         message: "Employee not found",
       });
     }
+
+    // Menghapus data cuti berdasarkan nomor induk karyawan
+    await Leave.destroy({
+      where: {
+        nomorInduk: nomorInduk,
+      },
+    });
 
     // Melakukan penghapusan data karyawan
     await existingEmployee.destroy();
@@ -234,10 +221,27 @@ const getEmployeeById = async (req, res) => {
         message: "Employee not found",
       });
     } else {
+      // Mengambil data cuti karyawan
+      const leavesData = employee.leaves.map((leave) => ({
+        id: leave.id,
+        tanggalCuti: leave.tanggalCuti,
+        lamaCuti: leave.lamaCuti,
+        keterangan: leave.keterangan,
+      }));
       res.send({
         status: 200,
         message: "Get employee success",
-        data: employee,
+        data: {
+          id: employee.id,
+          nomorInduk: employee.nomorInduk,
+          nama: employee.nama,
+          alamat: employee.alamat,
+          tanggalLahir: employee.tanggalLahir,
+          tanggalBergabung: employee.tanggalBergabung,
+          createdAt: employee.createdAt,
+          updatedAt: employee.updatedAt,
+          cutis: leavesData,
+        },
       });
     }
   } catch (error) {

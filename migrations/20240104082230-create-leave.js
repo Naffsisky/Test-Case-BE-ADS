@@ -10,15 +10,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nomorInduk: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        references: {
+          model: 'Employees',
+          key: 'nomorInduk'
+        },
+        onDelete: 'CASCADE'
       },
       tanggalCuti: {
-        type: Sequelize.DATE
+        allowNull: false,
+        type: Sequelize.DATEONLY
       },
       lamaCuti: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       keterangan: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

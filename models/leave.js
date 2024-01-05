@@ -2,15 +2,11 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Leave extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       Leave.belongsTo(models.Employee, {
         foreignKey: "nomorInduk",
         as: "employee",
+        onDelete: "CASCADE",
       });
     }
   }
@@ -19,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       nomorInduk: {
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true,
       },
       tanggalCuti: {
         type: DataTypes.DATEONLY,

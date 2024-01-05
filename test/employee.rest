@@ -24,7 +24,7 @@ Content-Type: application/json
     "nomorInduk": "IP06013",
     "nama": "Raisa",
     "alamat": "Jln Kelapa Sawit, Jakarta Selatan",
-    "tanggalLahir": "17-12-19902",
+    "tanggalLahir": "17-12-1992",
     "tanggalBergabung": "16-08-2008"
 }
 

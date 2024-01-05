@@ -3,29 +3,26 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Employees', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      no: {
-        type: Sequelize.INTEGER
-      },
       nomorInduk: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        primaryKey: true,
+        allowNull: false
       },
       nama: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       alamat: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       tanggalLahir: {
-        type: Sequelize.DATE
+        allowNull: false,
+        type: Sequelize.DATEONLY
       },
       tanggalBergabung: {
-        type: Sequelize.DATE
+        allowNull: false,
+        type: Sequelize.DATEONLY
       },
       createdAt: {
         allowNull: false,
